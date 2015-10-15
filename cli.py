@@ -1,7 +1,4 @@
-
-# going to want to use argv
-# from os import sys
-# import time
+from os import sys
 
 # store the information here
 game_array = [[''], [''], [''], [''], [''], [''], [''], [''], ['']]
@@ -19,8 +16,7 @@ print "The board game looks like this:"
 print game_board
 print "To play, type the number of the square you'd like to claim."
 print "The squares are numbered 1-9, like so:"
-square_numbers = "[[1][2][3]]\n[[4][5][6]]\n[[7][8][9]]\n"
-print square_numbers
+print "[[1][2][3]]\n[[4][5][6]]\n[[7][8][9]]\n"
 print '-'* 20
 print "The game is on!"
 print '-'* 20
@@ -44,7 +40,6 @@ def update_game_board(move, current_player):
     print game_board
 
 def check_game_status():
-    # use turn as input to determine who won?
     # across wins
     game_won = False
     for i in [0, 3, 6]: 
@@ -74,42 +69,39 @@ def check_game_status():
 def get_move():
     worked = False
     move = raw_input("> ")
-    move = int(move)
-    if move in range(1,10):
-        if game_array[move - 1][0] == '':
-            worked = True
-        else:
-            move = ''
-    else: 
+    try:
+        move = int(move)
+        if move in range(1,10):
+            if game_array[move - 1][0] == '':
+                worked = True
+    except:
         move = ''
     return [worked, move]
 
-# just gotta wrap this in a function
 while True: 
     if current_player == 1:
         print "Player 1, what is your move?"
         worked, move = get_move()
         while worked == False:
-            print "That space is taken. Try again:"
+            print "Invalid move. Try again:"
             worked, move = get_move()
         update_game_board(move, current_player)
         game_won = check_game_status()
         if game_won:
             print "Player 1 wins!"
+            sys.exit()
         else:
             current_player = 2
     if current_player == 2:
         print "Player 2, what is your move?"
         worked, move = get_move()
         while worked == False:
-            print "That space is taken. Try again:"
+            print "Invalid move. Try again:"
             worked, move = get_move()
         update_game_board(move, current_player)
         game_won = check_game_status()
         if game_won:
             print "Player 2 wins!"
+            sys.exit()
         else:
             current_player = 1
-    else:
-        pass
-
