@@ -111,4 +111,3 @@ while True:
             sys.exit()
         else:
             current_player = 1
-
