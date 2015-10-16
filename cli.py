@@ -21,9 +21,6 @@ print '-'* 20
 print "The game is on!"
 print '-'* 20
 
-# track the current player
-current_player = 1
-
 def update_game_board(move, current_player):
     if current_player == 1:
         piece_type = 'X'
@@ -75,10 +72,10 @@ def get_move():
         move = ''
     return [worked, move]
 
-
-
 # handle game interaction
 total_moves = 0
+current_player = 1
+
 while True: 
     if current_player == 1:
         print "Player 1, what is your move?"
