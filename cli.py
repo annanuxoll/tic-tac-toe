@@ -25,8 +25,7 @@ print '-'* 20
 current_player = 1
 
 def update_game_board(move, current_player):
-    """ move should be an integer from 1-9 and piece_type will be 
-    either X or O (as a string)"""
+    """ move should be an integer from 1-9"""
     if current_player == 1:
         piece_type = 'X'
     else: 
