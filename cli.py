@@ -25,12 +25,10 @@ print '-'* 20
 current_player = 1
 
 def update_game_board(move, current_player):
-    """ move should be an integer from 1-9"""
     if current_player == 1:
         piece_type = 'X'
     else: 
         piece_type = 'O'
-    # if game_array[move - 1][0] == '':
     game_array[move - 1][0] += piece_type
     game_board = (str(game_array[0:3]).replace(',', '') + 
             "\n" + str(game_array[3:6]).replace(',', '') +  
@@ -77,6 +75,10 @@ def get_move():
         move = ''
     return [worked, move]
 
+
+
+# handle game interaction
+total_moves = 0
 while True: 
     if current_player == 1:
         print "Player 1, what is your move?"
@@ -85,9 +87,13 @@ while True:
             print "Invalid move. Try again:"
             worked, move = get_move()
         update_game_board(move, current_player)
+        total_moves += 1
         game_won = check_game_status()
         if game_won:
             print "Player 1 wins!"
+            sys.exit()
+        if total_moves >= 9 and not game_won:
+            print "It's a draw!"
             sys.exit()
         else:
             current_player = 2
@@ -98,9 +104,14 @@ while True:
             print "Invalid move. Try again:"
             worked, move = get_move()
         update_game_board(move, current_player)
+        total_moves += 1
         game_won = check_game_status()
         if game_won:
             print "Player 2 wins!"
             sys.exit()
+        if total_moves >= 9 and not game_won:
+            print "It's a draw!"
+            sys.exit()
         else:
             current_player = 1
+
